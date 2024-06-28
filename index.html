@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viktor's Personal 
+           Finance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Viktor's Personal 
+                Finance Tracker</h1>
+        </header>
+        <main id="mainContent">
+            <h2>Add Transaction</h2>
+            <form id="transaction-form">
+                <input type="text" id="description" placeholder="Description" required>
+                <input type="number" id="amount" placeholder="Amount" required>
+                <select id="category">
+                    <option value="salary">Salary</option>
+                    <option value="food">Food</option>
+                    <option value="transport">Transport</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="others">Others</option>
+                </select>
+                <button type="submit">Add</button>
+            </form>
+            <h2>Transactions</h2>
+            <ul id="transactions-list"></ul>
+            <h2>Spending Charts</h2>
+            <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="transactionsChart"></canvas>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+<!-- ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠞⠛⣉⡉⠄⠀⠀⠀⠀⠀⠐⠯⣛⡳⢦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⢛⡡⠔⠚⣉⡀⠄⠀⠀⠒⠀⠀⠀⠀⠀⠀⠈⠓⠪⣝⡳⢤⣀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣀⡴⢛⡥⢒⡩⠔⣒⣩⡥⠶⠖⠚⠛⠛⠓⠶⠦⢤⣄⣈⠑⠢⢄⡀⠉⠲⢝⠳⣤⡀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣤⠞⢉⣔⡯⢒⣥⠶⠛⣉⣤⣶⣶⣿⣿⣿⣿⣿⣿⠿⢷⣾⣯⣟⡶⣤⣈⠲⠀⠀⠑⢬⠙⢦⡀⠀⠀
+⠀⠀⢀⡴⠟⠁⣴⢟⣡⡾⢋⣥⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣤⣤⡈⠻⣿⣿⣿⣯⣻⣦⣅⡀⠀⠀⠀⠙⢷⣄
+⣠⡼⠋⠀⠀⣠⡴⣛⣥⣾⣿⣿⣿⢿⡟⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡇⢸⠻⣿⣿⣿⣿⣮⣿⡦⠀⠀⠀⠀⠉
+⠉⠀⠀⣠⣾⣯⡾⠟⠋⠀⢻⣿⣿⠘⡇⠙⠙⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⠃⣼⠀⣾⠉⡏⢸⡟⠛⠛⣷⠀⠀
+⠀⠀⣨⣷⡟⢹⠀⠀⠀⠀⠀⠈⢻⣆⠹⡄⠀⠈⠛⠿⣿⣿⣿⣿⠿⣫⠎⡰⠃⣼⠃⠘⠁⣼⠁⣠⣾⡏⠀⠁⠀
+⠀⠸⣿⣽⣷⣤⣄⡀⠀⡀⠀⠀⠀⠙⠷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠈⣡⠞⣡⠞⠁⠀⠀⢀⣡⣾⣿⠋⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠉⠙⠳⢮⣗⣦⣀⣀⠀⠈⠙⠷⠶⢤⣤⣤⣤⣤⡾⠿⠛⠁⠀⢀⣠⣶⣿⡿⢋⣰⠆⡀⠀⠀⠀⠀
+⠀⠙⠛⠛⠛⠳⢦⣄⡀⠀⠈⠙⠻⠾⢿⣶⣦⣄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣶⣿⠿⠛⢉⣤⠞⣡⠞⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⢠⡳⢤⣉⠛⠳⠶⣤⣄⣀⡀⠀⠉⠙⠛⠛⠛⠛⠛⠛⠛⠛⠛⠉⠉⢀⣠⡶⠋⣡⠞⡡⠚⠀
+⠀⠀⠀⠀⠰⣝⡳⠮⣭⠂⠀⠀⠈⠉⠙⢛⠶⠶⢶⣤⣤⣄⣀⣀⣠⣤⣴⠶⠟⠋⠁⠰⠋⠕⣊⠴⠂⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ -->
+
+
